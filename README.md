@@ -1,1 +1,11 @@
-Gostaria de compartilhar uma solução simples que desenvolvi para facilitar meus estudos em tecnologia, especialmente quando me deparo com vídeos em inglês. Como ainda estou aprimorando meu domínio da língua, criei um script em Python que permite adicionar legendas em português a vídeos previamente baixados. O usuário precisa fornecer o caminho onde o vídeo está armazenado, tornando o processo fácil e personalizado. O script adicionará automaticamente legendas em português ao vídeo especificado.
+# Python Video Subtitle Adder
+
+Este repositório contém um script simples em Python que facilita a adição de legendas em português a vídeos previamente baixados. Essa solução foi desenvolvida para tornar os estudos em tecnologia mais acessíveis, especialmente ao lidar com conteúdo em inglês. O script é útil, principalmente, para aqueles que podem enfrentar desafios ao compreender integralmente materiais apresentados exclusivamente em inglês.
+
+## Como Funciona
+
+O script permite ao usuário adicionar legendas em português a vídeos especificados. Basta fornecer o caminho onde o vídeo está armazenado, tornando o processo fácil e personalizado. O script realizará automaticamente a adição das legendas ao vídeo.
+
+## Pré-requisitos
+
+Certifique-se de ter o Python instalado em seu ambiente, além de configurar o whisper e googletrans.
