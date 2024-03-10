@@ -4,6 +4,8 @@ from googletrans import Translator
 import whisper
 import shutil
 
+# site para baixar videos do YouTube https://greenconvert.net/pt6/youtube-mp4
+
 def initialize_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\033[H\033[J')  # Código ANSI para limpar o terminal
