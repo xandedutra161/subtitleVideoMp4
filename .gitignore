@@ -1,0 +1,6 @@
+# Ignorar arquivos ocultos dentro de um diretório
+completed/.*
+completed/*
+
+target/.*
+target/*
