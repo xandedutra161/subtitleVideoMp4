@@ -42,8 +42,10 @@ def process_video_file(video_file_path, output_srt_file_path):
             srt_file.write(f"{i}\n{start_time_str} --> {end_time_str}\n{text_translated}\n\n")
 
 def process_all_mp4_files(directory_path):
+    print("Procurando videos")
     for filename in os.listdir(directory_path):
         if filename.endswith(".mp4"):
+            print("Video encontrado -> " + filename)
             video_file_path = os.path.join(directory_path, filename)
             output_srt_file_path = os.path.join(directory_path, f"{os.path.splitext(filename)[0]}.srt")
             process_video_file(video_file_path, output_srt_file_path)
@@ -52,7 +54,9 @@ def process_all_mp4_files(directory_path):
 def check_folder(pasta_origem, pasta_destino):
     if len(os.listdir(pasta_origem)) != 0:
         for arquivo in os.listdir(pasta_origem):
-            shutil.move(os.path.join(pasta_origem, arquivo), pasta_destino)
+            if arquivo != '.gitkeep':  # Ignora o arquivo .gitkeep
+                shutil.move(os.path.join(pasta_origem, arquivo), pasta_destino)
+
         
         print()
         print("O arquivos foram contertidos com sucesso, para visualizar verifique na pasta \"completed\"")
@@ -62,7 +66,7 @@ def check_folder(pasta_origem, pasta_destino):
 # Specify the directory containing your MP4 files
 current_directory = os.getcwd()
 source_folder = current_directory + "/target"
-destination_folder = "/completed"
+destination_folder = current_directory + "/completed"
 
 # Process all MP4 files in the specified directory
 initialize_terminal()
