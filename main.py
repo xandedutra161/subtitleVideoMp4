@@ -24,6 +24,8 @@ def translate_transcription(texto):
         return f"Translation Error: {e}"
 
 def process_video_file(video_file_path, output_srt_file_path):
+    print()
+    print("Aguarde... Carregando video para ser processado pela I.A.")
     model = whisper.load_model("small")
     audio = whisper.load_audio(video_file_path)
     result = model.transcribe(audio, fp16=False, language="en")
@@ -42,7 +44,12 @@ def process_video_file(video_file_path, output_srt_file_path):
             srt_file.write(f"{i}\n{start_time_str} --> {end_time_str}\n{text_translated}\n\n")
 
 def process_all_mp4_files(directory_path):
-    print("Procurando videos")
+    print("Procurando videos...")
+    size_files = [file for file in os.listdir(directory_path) if not file.startswith('.')]
+
+    if len(size_files) == 0:
+        print("Nenhum video encontrado")
+
     for filename in os.listdir(directory_path):
         if filename.endswith(".mp4"):
             print("Video encontrado -> " + filename)
@@ -52,15 +59,18 @@ def process_all_mp4_files(directory_path):
 
 
 def check_folder(pasta_origem, pasta_destino):
-    if len(os.listdir(pasta_origem)) != 0:
+    size_files = len(os.listdir(pasta_origem))
+    cont = 0
+    if size_files != 0 :
         for arquivo in os.listdir(pasta_origem):
             if arquivo != '.gitkeep':  # Ignora o arquivo .gitkeep
                 shutil.move(os.path.join(pasta_origem, arquivo), pasta_destino)
-
-        
-        print()
-        print("O arquivos foram contertidos com sucesso, para visualizar verifique na pasta \"completed\"")
-        print()
+                cont += 1                
+                if cont == size_files:
+                    print()
+                    print("O arquivos foram contertidos com sucesso, para visualizar verifique na pasta \"completed\"")
+                    print()
+                    
         print("Programa encerrado")
 
 # Specify the directory containing your MP4 files
