@@ -4,7 +4,8 @@ from googletrans import Translator
 import whisper
 import shutil
 
-# site para baixar videos do YouTube https://greenconvert.net/pt6/youtube-mp4
+# site para baixar videos do YouTube
+#https://ummy.net/pt33ZN/
 
 def initialize_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -24,7 +25,6 @@ def translate_transcription(texto):
         return f"Translation Error: {e}"
 
 def process_video_file(video_file_path, output_srt_file_path):
-    print()
     print("Aguarde... Carregando video para ser processado pela I.A.")
     model = whisper.load_model("small")
     audio = whisper.load_audio(video_file_path)
@@ -42,6 +42,8 @@ def process_video_file(video_file_path, output_srt_file_path):
             text_translated = translate_transcription(transcription)
 
             srt_file.write(f"{i}\n{start_time_str} --> {end_time_str}\n{text_translated}\n\n")
+    
+
 
 def process_all_mp4_files(directory_path):
     print("Procurando videos...")
@@ -52,26 +54,26 @@ def process_all_mp4_files(directory_path):
 
     for filename in os.listdir(directory_path):
         if filename.endswith(".mp4"):
+            print()
             print("Video encontrado -> " + filename)
             video_file_path = os.path.join(directory_path, filename)
             output_srt_file_path = os.path.join(directory_path, f"{os.path.splitext(filename)[0]}.srt")
             process_video_file(video_file_path, output_srt_file_path)
+            print("Video legendado com sucesso -> " + filename)
+
 
 
 def check_folder(pasta_origem, pasta_destino):
-    size_files = len(os.listdir(pasta_origem))
-    cont = 0
-    if size_files != 0 :
-        for arquivo in os.listdir(pasta_origem):
-            if arquivo != '.gitkeep':  # Ignora o arquivo .gitkeep
-                shutil.move(os.path.join(pasta_origem, arquivo), pasta_destino)
-                cont += 1                
-                if cont == size_files:
-                    print()
-                    print("O arquivos foram contertidos com sucesso, para visualizar verifique na pasta \"completed\"")
-                    print()
+
+    for arquivo in os.listdir(pasta_origem):
+        if arquivo != '.gitkeep':  # Ignora o arquivo .gitkeep
+            shutil.move(os.path.join(pasta_origem, arquivo), pasta_destino)
+            print(arquivo + " movido para pasta \"completed\"")
+
                     
-        print("Programa encerrado")
+    
+    print()
+    print("Programa encerrado")
 
 # Specify the directory containing your MP4 files
 current_directory = os.getcwd()
